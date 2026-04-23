@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -43,7 +44,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-container">
         <Link to="/" className="logo">
-          Arict<span>.</span>
+          <img src={logo} alt="ARICT Logo" className="logo-img" />
         </Link>
         <ul className="nav-links" ref={navRef} onMouseLeave={handleMouseLeave}>
           <div className="nav-indicator" style={indicatorStyle}></div>
