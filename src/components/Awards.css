@@ -1,0 +1,72 @@
+.awards h2 {
+  color: var(--color-black);
+  margin-bottom: 50px;
+}
+
+.awards .pill-tag {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-black);
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.award-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background-color: var(--color-gray);
+  border-radius: var(--border-radius-md);
+  text-align: left;
+  transition: var(--transition);
+}
+
+.award-card:hover {
+  transform: scale(1.02);
+  background-color: var(--color-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.award-icon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-black);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.award-info .year {
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.award-info h3 {
+  color: var(--color-black);
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+
+.award-info p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+}

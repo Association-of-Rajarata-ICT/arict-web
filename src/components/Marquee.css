@@ -1,0 +1,38 @@
+.marquee-container {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+  transform: rotate(-1deg) scale(1.02);
+  margin: 40px 0;
+}
+
+.marquee-content {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0 20px;
+}
+
+.marquee-separator {
+  font-size: 1.2rem;
+  padding: 0 20px;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); } /* Because we duplicate array 3 times */
+}
