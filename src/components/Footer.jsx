@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import logo from '../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -14,11 +15,11 @@ const Footer = () => {
               Hire Agency <ArrowRight size={20} />
             </Link>
           </div>
-          
+
           <div className="footer-links-grid">
             <div className="footer-col brand-col">
               <Link to="/" className="logo">
-                Arict<span>.</span>
+                <img src={logo} alt="ARICT Logo" className="logo-img footer-logo-img" />
               </Link>
               <p>A premium digital agency dedicated to elevating your brand through cutting-edge web design.</p>
               <div className="social-links">
