@@ -70,7 +70,7 @@
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(163, 247, 51, 0.2) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.2) 0%, rgba(0,0,0,0) 70%);
   z-index: 1;
 }
 
@@ -86,11 +86,11 @@
 .floating-card {
   position: absolute;
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
   padding: 20px;
   border-radius: var(--border-radius-md);
   z-index: 3;
-  box-shadow: 0 10px 30px rgba(163, 247, 51, 0.2);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
 }
 
 .floating-card h3 {

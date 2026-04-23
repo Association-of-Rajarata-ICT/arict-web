@@ -21,7 +21,7 @@
 
 .portfolio-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(163, 247, 51, 0.3);
+  border-color: rgba(220, 38, 38, 0.3);
 }
 
 .portfolio-img-wrapper {

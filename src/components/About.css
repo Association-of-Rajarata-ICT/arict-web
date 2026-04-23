@@ -20,13 +20,13 @@
   bottom: -30px;
   left: -30px;
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
   padding: 30px;
   border-radius: var(--border-radius-lg);
   display: flex;
   align-items: center;
   gap: 15px;
-  box-shadow: 0 10px 30px rgba(163, 247, 51, 0.2);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
 }
 
 .experience-badge .years {

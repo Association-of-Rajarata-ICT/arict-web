@@ -42,7 +42,7 @@
 
 .info-card {
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
   padding: 50px;
   border-radius: var(--border-radius-lg);
   height: 100%;
@@ -75,14 +75,14 @@
 }
 
 .info-item p {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   line-height: 1.5;
 }
 
 .social-links-box {
   margin-top: auto;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 30px;
 }
 
@@ -101,7 +101,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@
 
 .social-icons a:hover {
   background-color: var(--color-black);
-  color: var(--color-primary);
+  color: var(--color-white);
   border-color: var(--color-black);
 }
 

@@ -32,7 +32,7 @@
 
 .slider-btn.next {
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
 }
 
 .slider-btn:hover {
@@ -70,7 +70,7 @@
   width: 40px;
   height: 40px;
   background-color: var(--color-primary);
-  color: var(--color-black);
+  color: var(--color-white);
   border-radius: 50%;
   display: flex;
   align-items: center;
