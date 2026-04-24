@@ -1,6 +1,16 @@
 import { sql } from '../_db.js';
 import { requireAuth } from '../_auth.js';
 
+const formatEvent = (event) => {
+  if (!event || !event.event_date) return event;
+  const d = event.event_date;
+  if (d instanceof Date) {
+    const pad = (n) => String(n).padStart(2, '0');
+    event.event_date = `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
+  }
+  return event;
+};
+
 export default async function handler(req, res) {
   const { id } = req.query;
 
@@ -10,7 +20,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       const event = await sql`SELECT * FROM events WHERE id = ${id}`;
       if (event.length === 0) return res.status(404).json({ error: 'Not found' });
-      return res.status(200).json(event[0]);
+      return res.status(200).json(formatEvent(event[0]));
     }
 
     if (req.method === 'PUT') {
@@ -33,7 +43,7 @@ export default async function handler(req, res) {
       `;
       
       if (updated.length === 0) return res.status(404).json({ error: 'Not found' });
-      return res.status(200).json(updated[0]);
+      return res.status(200).json(formatEvent(updated[0]));
     }
 
     if (req.method === 'DELETE') {

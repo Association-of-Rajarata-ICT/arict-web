@@ -7,6 +7,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const AdminEvents = () => {
+  // Neon returns timestamp (no-tz) values with a trailing 'Z', which causes
+  // new Date() to treat them as UTC and shift by the local offset.
+  // Strip the Z to parse as local time.
+  const parseLocalDate = (str) => str ? new Date(str.replace(/Z$/, '')) : null;
+
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +43,7 @@ const AdminEvents = () => {
       setFormData({
         title: event.title || '',
         description: event.description || '',
-        event_date: event.event_date ? new Date(event.event_date) : null,
+        event_date: event.event_date ? parseLocalDate(event.event_date) : null,
         location: event.location || '',
         image_url: event.image_url || '',
         registration_link: event.registration_link || '',
@@ -148,7 +153,7 @@ const AdminEvents = () => {
               events.map(event => (
                 <tr key={event.id}>
                   <td>{event.title}</td>
-                  <td>{event.event_date ? new Date(event.event_date).toLocaleString() : 'N/A'}</td>
+                  <td>{event.event_date ? parseLocalDate(event.event_date).toLocaleString() : 'N/A'}</td>
                   <td>{event.location || '-'}</td>
                   <td>{event.capacity || 'Unlimited'}</td>
                   <td>

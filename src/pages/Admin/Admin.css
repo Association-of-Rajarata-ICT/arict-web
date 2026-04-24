@@ -473,12 +473,33 @@
 .react-datepicker__time-container {
   border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+/* ↓ These two were missing — caused the white time panel */
+.react-datepicker__time {
+  background-color: #1a1a1a !important;
+}
+.react-datepicker__time-box {
+  background-color: #1a1a1a !important;
+}
+.react-datepicker__time-list {
+  background-color: #1a1a1a !important;
+}
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
   color: white !important;
+  background-color: #1a1a1a !important;
 }
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
   background-color: var(--color-primary) !important;
+  color: white !important;
+}
+.react-datepicker__navigation-icon::before {
+  border-color: rgba(255,255,255,0.6) !important;
+}
+.react-datepicker__day--outside-month {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+.react-datepicker__triangle {
+  display: none !important;
 }
