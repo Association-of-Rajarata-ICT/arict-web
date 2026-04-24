@@ -6,30 +6,32 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(220, 38, 38, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.4);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.25);
   transition: all 0.3s cubic-bezier(0.25, 1, 0.2, 1);
 }
 
 .calendar-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(220, 38, 38, 0.3);
+  box-shadow: 0 6px 28px rgba(220, 38, 38, 0.45);
   transform: translateY(-3px) scale(1.08);
 }
 
 .calendar-toggle-btn.active {
-  background: #00E5FF;
-  border-color: #00E5FF;
-  color: black;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
   transform: rotate(90deg);
+  box-shadow: 0 6px 28px rgba(220, 38, 38, 0.6);
 }
 
 /* Calendar Widget */
@@ -44,6 +46,21 @@
   transform-origin: bottom left;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   pointer-events: none;
+  
+  /* Glassmorphism Styles (Moved here to fix stacking context blur bug) */
+  width: 320px;
+  background: rgba(20, 10, 10, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(220, 38, 38, 0.08);
+  color: white;
+  font-family: var(--font-family);
+  overflow: hidden; /* Clips the background blobs nicely */
 }
 
 .calendar-widget-wrapper.open {
@@ -53,19 +70,35 @@
   pointer-events: auto;
 }
 
+/* Background Blobs for Glass Effect */
+.calendar-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.calendar-blob-1 {
+  width: 160px;
+  height: 160px;
+  background: #dc2626; /* Primary Red */
+  top: -30px;
+  left: -30px;
+}
+
+.calendar-blob-2 {
+  width: 180px;
+  height: 180px;
+  background: #7f1d1d; /* Dark Red */
+  bottom: -40px;
+  right: -20px;
+}
+
 .calendar-glass-panel {
-  width: 320px;
-  background: rgba(40, 40, 40, 0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.5),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  color: white;
-  font-family: var(--font-family);
+  position: relative;
+  width: 100%;
+  z-index: 2; /* Ensures content stays above blobs */
 }
 
 /* Header */
@@ -98,7 +131,7 @@
 
 .cal-nav-btn:hover {
   color: white;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(220, 38, 38, 0.2);
 }
 
 /* Grid */
@@ -112,8 +145,18 @@
 .cal-day-name {
   font-size: 0.8rem;
   font-weight: 500;
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 8px;
+}
+
+.cal-date-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  cursor: pointer;
+  position: relative; /* Needed for pseudo-element glass layer */
 }
 
 .cal-date-cell {
@@ -124,21 +167,166 @@
   justify-content: center;
   height: 32px;
   width: 32px;
-  margin: 0 auto;
   border-radius: 50%;
-  transition: all 0.2s ease;
-  cursor: default;
+  position: relative; /* For pseudo-element prismatic lines */
+  transition: 
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    border 0.2s ease;
+  transform-origin: center;
 }
 
-.cal-date-cell.current-month {
-  color: #00E5FF; /* Cyan match from image */
+.cal-date-wrapper.current-month {
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.cal-date-cell.other-month {
+.cal-date-wrapper.other-month {
   color: rgba(255, 255, 255, 0.2);
 }
 
-.cal-date-cell:hover {
-  background: rgba(0, 229, 255, 0.15);
+.cal-date-wrapper:hover .cal-date-cell {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: white;
+  transform: scale(1.18);
+  box-shadow:
+    inset 0 1px 6px rgba(255, 255, 255, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Prismatic top line — same as navbar indicator */
+.cal-date-wrapper:hover .cal-date-cell::before,
+.cal-date-wrapper:hover .cal-date-cell::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(220, 38, 38, 0) 0%,
+    rgba(220, 38, 38, 0.9) 40%,
+    rgba(255, 180, 180, 1) 50%,
+    rgba(220, 38, 38, 0.9) 60%,
+    rgba(220, 38, 38, 0) 100%
+  );
+  filter: blur(0.5px);
+  opacity: 0.85;
+}
+
+.cal-date-wrapper:hover .cal-date-cell::before {
+  top: 0;
+}
+
+.cal-date-wrapper:hover .cal-date-cell::after {
+  bottom: 0;
+}
+
+.cal-date-cell.selected {
+  background: var(--color-primary);
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.5);
+}
+
+.cal-date-cell.today:not(.selected) {
+  border: 1px solid rgba(220, 38, 38, 0.7);
+  color: #ef4444;
+}
+
+.cal-event-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin-top: 2px;
+  box-shadow: 0 0 5px rgba(220, 38, 38, 0.8);
+}
+
+/* Event List UI */
+.cal-events-list {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(220, 38, 38, 0.2);
+  animation: slideUpFade 0.3s ease;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cal-events-title {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.cal-events-scroll {
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.cal-events-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.cal-events-scroll::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.3);
+  border-radius: 4px;
+}
+
+.cal-event-item {
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cal-event-item:hover {
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.4);
+  transform: translateX(3px);
+}
+
+.cal-event-item-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-event-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cal-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cal-no-events {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: 15px 0;
 }
