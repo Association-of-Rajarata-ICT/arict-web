@@ -17,8 +17,13 @@
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.2, 1);
   }
 
-  .custom-cursor-container.hovering {
-    transform: translate(-10%, -10%) scale(1.3);
+  .custom-cursor-container.hovering .cursor-glass-image {
+    /* Turn the cursor red and add a red glow */
+    filter: drop-shadow(0 8px 15px rgba(220, 38, 38, 0.6)) 
+            sepia(100%) 
+            hue-rotate(315deg) 
+            saturate(500%) 
+            brightness(110%);
   }
 
   .cursor-glass-image {
@@ -30,5 +35,6 @@
     background-repeat: no-repeat;
     background-position: top left;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    transition: filter 0.3s ease;
   }
 }
